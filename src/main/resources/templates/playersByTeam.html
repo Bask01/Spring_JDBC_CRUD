@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Players By Team</title>
+</head>
+<body>
+
+	<h1>View Players by Team</h1>
+	
+	<ul>
+		<!-- viewTeam/MTL -->
+		<li th:each="t : ${teams}"><a href="" th:href="|@{/viewTeam/}${t.id}|"
+				th:text="${t.id}">team</a></li>
+	
+	</ul>
+	
+	
+	<table>
+	
+	
+ 	<tr><th colspan="5">My Team</th></tr>
+	<tr><th>Number</th><th>Name</th></tr>
+	
+	<tr  th:each="p : ${players}">
+		
+				<td th:text="${p.number}">#</td>
+				<td th:text="|${p.lastName}, ${p.firstName}">name</td>
+	</tr>
+	</table>
+
+</body>
+</html>

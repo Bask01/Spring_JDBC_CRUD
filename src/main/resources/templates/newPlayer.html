@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+<body>
+
+
+<h1>Add New Player</h1>
+
+	<form method="post" action="/addPlayer" th:object="${player}">
+	
+		<input type="hidden" name="id" th:field="*{id}">
+		
+		<p><label for="firstName">First Name:
+			<input type="text" id="firstName" name="firstName" 
+			required th:field="*{firstName}" >
+		</label><br>
+		<label for="lastName">Last Name:
+			<input type="text" id="lastName" name="lastName"
+			 required th:field="*{lastName}">
+		</label><br>
+		<label for="">Jersey Number:
+			<input type="number" id="number" name="number" min="0" 
+			required th:field="*{number}">
+		</label><br>
+		</p>
+<!--    <p>
+		<label for="team">Team:
+			<input type="text" id="team" name="team" size="3" 
+			th:field="*{team}">
+			
+				<select id="team" name="team" th:field="*{team}">
+					<option th:each="t : ${teams}" th:value="${t.id}"
+					value="MTL" th:text="${t}">team name</option>
+				</select>
+						
+		</label><br></p> -->
+		
+	<div th:if="${#lists.isEmpty(session.teamList)}">
+		<label for="team">Team:
+		<!-- 	<input type="text" id="team" name="team" size="3" 
+			th:field="*{team}"> -->
+			
+				<select id="team" name="team" th:field="*{team}">
+					<option th:each="t : ${teams}" th:value="${t.id}"
+					value="MTL" th:text="${t}">team name</option>
+				</select>
+						
+		</label>
+	
+	</div>
+
+
+	<div th:unless="${#lists.isEmpty(session.teamList)}"><!-- test if session.teams exists, if exists test if it contains any item -->
+		
+		<label for="team">Team:
+			
+				<select id="team" name="team">
+					<option th:each="t : ${session.teamList}" th:value="${t.id}"
+					value="MTL" th:text="${t}">team name</option>
+				</select>
+						
+		</label>
+	
+	</div>	
+		
+		
+		<p><input type="submit"></p>
+	</form>
+	
+</body>
+</html>
